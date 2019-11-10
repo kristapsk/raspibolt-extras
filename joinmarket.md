@@ -1,5 +1,7 @@
 ## JoinMarket guide for RaspiBolt
 
+(this guide is unfinished draft, work in progress)
+
 ### Introduction
 
 [JoinMarket](https://github.com/JoinMarket-Org/joinmarket-clientserver) is a CoinJoin software, which allows you to increase privacy and fungibility of on-chain Bitcoin transactions. It includes it's own Bitcoin wallet, backed by `bitcoind`, and users market / taker model, which means that either you pay small fee for CoinJoin privacy or just keep software running and then you get paid for providing liquidity for CoinJoin's. Even if you aren't interested in privacy of your coins, you can use JoinMarket for some little passive income from your bitcoins, without giving up your private keys.

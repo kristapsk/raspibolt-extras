@@ -26,7 +26,7 @@ It isn't strict requirement, but for the privacy it's recommended to use JoinMar
 
 `$ sudo su - bitcoin`
 
-* Download, verify and extract the latest release (check the [Releases page](https://github.com/JoinMarket-Org/joinmarket-clientserver/releases) on Github for the correct links)
+* Download, verify and extract the latest release (check the [Releases page](https://github.com/JoinMarket-Org/joinmarket-clientserver/releases) on Github for the correct links).
 
 ```
 # download software
@@ -187,11 +187,38 @@ Yield generator is a maker bot provides liquidity to the JoinMarket, so that oth
 (jmvenv) $ python yg-privacyenhanced.py wallet.jmdat
 ```
 
-* Look at [tmux](https://man.openbsd.org/OpenBSD-current/man1/tmux.1) or [GNU Screen](https://www.gnu.org/software/screen/), to keep yield generator running after you close ssh connection to the RaspiBolt.
+#### Running a yield generator in background (after you close ssh connection to the RaspiBolt
+
+* Install tmux from the "admin" user
+
+`$ sudo apt-get install tmux`
+
+* Start tmux from the "bitcoin" user
+
+```
+$ sudo su - bitcoin
+$ tmux`
+```
+* Start yield generator inside tmux session
+```
+$ cd /home/bitcoin/joinmarket-clientserver-0.5.0
+$ source jmvenv/bin/activate
+(jmvenv) $ cd scripts
+(jmvenv) $ python yg-privacyenhanced.py wallet.jmdat
+```
+* Press Ctrl+B and then D to detach from tmux session (it will keep running in a background)
+
+* Later you can attach to that session from "bitcoin" user
+
+`$ tmux attach`
+
+* Read more details about using tmux in this guide: https://www.ocf.berkeley.edu/~ckuehl/tmux/
 
 ### Sending payments
 
-Note that you cannot use JoinMarket as a taker while yield generator is running with the same wallet. Before sending payments, you should stop yield generator, pressing Ctrl+C in a screen where it is running. So, idea is to stop yield generator, do your payment as a taker, and then start yield generator again. Mixing maker and taker roles in a single wallet is actually good for your privacy too.
+Note that you cannot use JoinMarket as a taker while yield generator is running with the same wallet. Before sending payments, you should stop yield generator, pressing Ctrl+C in a screen where it is running. So, idea is to stop yield generator, do your payment as a taker, and then start yield generator again. If you will try to send a payment while yield generator is running on the same wallet, you will get error that wallet is locked by another process.
+
+Mixing maker and taker roles in a single wallet is actually good for your privacy too.
 
 * See https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/USAGE.md#try-out-a-coinjoin-using-sendpaymentpy
 
@@ -201,6 +228,10 @@ Note that you cannot use JoinMarket as a taker while yield generator is running 
 
 * Wallet transaction history: `python wallet-tool.py wallet.jmdat history -v 4`
 
+### Running the tumbler
+
+* See https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/tumblerguide.md
+
 ### Other notes
 
 * Every time you disconnect from the RaspiBolt and connect again, if you are in a fresh session, before running any JoinMarket commands you need to do the following from "bitcoin" user:
@@ -209,3 +240,9 @@ $ cd /home/bitcoin/joinmarket-clientserver-0.5.0
 $ source jmvenv/bin/activate
 (jmvenv) $ cd scripts
 ```
+
+### Useful links
+
+* [JoinMarket docs](https://github.com/JoinMarket-Org/joinmarket-clientserver/tree/master/docs)
+* [JoinMarket guide for RaspiBlitz](https://github.com/openoms/bitcoin-tutorials/blob/master/joinmarket/README.md)
+* [Bitcoin privacy wiki](https://en.bitcoin.it/Privacy)

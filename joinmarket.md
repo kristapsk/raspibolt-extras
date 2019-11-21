@@ -4,7 +4,7 @@
 
 ### Introduction
 
-[JoinMarket](https://github.com/JoinMarket-Org/joinmarket-clientserver) is a CoinJoin software, which allows you to increase privacy and fungibility of on-chain Bitcoin transactions. It includes it's own Bitcoin wallet, backed by `bitcoind`, and users market / taker model, which means that either you pay small fee for CoinJoin privacy or just keep software running and then you get paid for providing liquidity for CoinJoin's. Even if you aren't interested in privacy of your coins, you can use JoinMarket for some little passive income from your bitcoins, without giving up your private keys.
+[JoinMarket](https://github.com/JoinMarket-Org/joinmarket-clientserver) is a CoinJoin software, which allows you to increase privacy and fungibility of on-chain Bitcoin transactions. It includes it's own Bitcoin wallet, backed by `bitcoind`, and uses market maker / market taker model, which means that either you pay small fee for having CoinJoin privacy fast (taker) or just keep software running and then you get paid for providing liquidity for CoinJoin's, in addition gaining privacy in a longer periods of time (maker). Even if you aren't interested in privacy of your coins, you can use JoinMarket for some little passive income from your bitcoins, without giving up your private keys. From my personal experience, currently earnings from running JoinMarket as a market maker (called yield generator bot) are bigger than what you get from routing Lightning Network payments (but still don't expect to get rich fast with that, will be less than 1% per year most likely).
 
 ### Preparations
 
@@ -26,7 +26,7 @@ It isn't strict requirement, but for the privacy it's recommended to use JoinMar
 
 `$ sudo su - bitcoin`
 
-* Download, verify and extract the latest release (check the [Releases page](https://github.com/JoinMarket-Org/joinmarket-clientserver/releases) on Github for the correct links).
+* Download, verify and extract the latest release (check the [Releases page](https://github.com/JoinMarket-Org/joinmarket-clientserver/releases) on Github for the correct links)
 
 ```
 # download software
@@ -75,7 +75,7 @@ $ source jmvenv/bin/activate
 Created a new `joinmarket.cfg`. Please review and adopt the settings and restart joinmarket.
 ```
 
-* Edit configuration file (`nano -w joinmarket.cfg`) and specify your bitcoind RPC settings. Optionally, if you have Tor enabled, comment out clearnet host entires under `[MESSAGING:server1]` and `[MESSAGING:server2]` and uncomment the ones with `.onion` addresses and `socks5 = true`.
+* Edit configuration file (`nano -w joinmarket.cfg`) and specify your bitcoind RPC settings. Optionally, if you have Tor enabled, comment out clearnet host entires under `[MESSAGING:server1]` and `[MESSAGING:server2]` and uncomment the ones with `.onion` addresses and `socks5 = true` (example below is for Tor enabled configuration).
 ```
 [BLOCKCHAIN]
 #options: bitcoin-rpc, regtest, electrum-server
@@ -129,11 +129,11 @@ hour embark smile mansion wisdom rebel loud enhance clean man panel broccoli
 
 Generated wallet OK
 ```
-Write down the words, they would allow to recover wallet later on different machine in case of hardware failure or other problem.
+Write down the words, they will allow to recover wallet later on different machine in case of hardware failure or other problem.
 
 ### Fund JoinMarket wallet
 
-JoinMarket wallet contains of five separate sub-wallets or pockets called "mixdepths". Idea is that coins between different mixdepths are never mixed together. When you do a CoinJoin transaction, change output goes back to the same mixdepth, but one of the equal amount outputs goes either to address of a different wallet (if you are taker) or to a different mixdepth in the same JoinMarket wallet (if you are a maker).
+JoinMarket wallet contains five separate sub-wallets (accounts) or pockets called "mixdepths". Idea is that coins between different mixdepths are never mixed together. When you do a CoinJoin transaction, change output goes back to the same mixdepth, but one of the equal amount outputs goes either to address of a different wallet (if you are taker) or to a different mixdepth in the same JoinMarket wallet (if you are a maker).
 
 * Run `wallet-tool.py` default method to get list of addresses. Send some bitcoins to the first address of mixdepth 0. At first run it will give a message about need to restart JM and rescan blockchain. No need to rescan, just run command again.
 ```
@@ -174,20 +174,20 @@ Balance for mixdepth 0: 0.00000000
 Total balance:  0.00000000
 ```
 
-### Running a yield generator bot
+### Running the yield generator bot
 
-Yield generator is a maker bot provides liquidity to the JoinMarket, so that others (takers) can make a CoinJoin's and they pay you a small fee for the service. It is recommended to fund your JoinMarket wallet with at least 0.1 BTC to run yield generator. But general principle is - the more funds you deposit in the wallet, the bigger chance of having passive CoinJoin transactions you have. But don't go reckless and remember that it is a hot wallet, so security is not the same as with a hardware wallet or other cold storage.
+Yield generator is a maker bot that provides liquidity to the JoinMarket, so that others (takers) can make a CoinJoin's and they pay you a small fee for the service. It is recommended to fund your JoinMarket wallet with at least 0.1 BTC to run the yield generator. But the general principle is - the more funds you deposit in the wallet, the bigger chance of having passive CoinJoin transactions you have. But don't go reckless and remember that it is a hot wallet, so security is not the same as with a hardware wallet or other cold storage.
 
 * Read the basics: https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/YIELDGENERATOR.md
 
 * Look at the settings (`nano -w yg-privacyenhanced.py`) and change them if you want to. Defaults could be ok, but you could also lower minium CoinJoin transaction amount (`minsize`) to 10000 sats (0.001 BTC, default is 100000 sats or 0.01 BTC). Also current relative CoinJoin maker fee (`cjfee_r`) default is 0.02%, you might want to rise it to 0.03%, as it is what Wasabi Wallet charges per anonimity set (`cjfee_r = 0.0003`). Note that values are approximations, yg-privacyenhanced will randomize them a little bit, due to privacy reasons.
 
-* Run yield generator
+* Run the yield generator
 ```
 (jmvenv) $ python yg-privacyenhanced.py wallet.jmdat
 ```
 
-#### Running a yield generator in background (after you close ssh connection to the RaspiBolt
+#### Running the yield generator in background (after you close ssh connection to the RaspiBolt
 
 * Install tmux from the "admin" user
 
@@ -230,11 +230,13 @@ Mixing maker and taker roles in a single wallet is actually good for your privac
 
 ### Running the tumbler
 
+Tumbler is a program that do series of CoinJoin's with various amounts and timing between them, to completely break the link between different addresses.
+
 * See https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/tumblerguide.md
 
 ### Other notes
 
-* Every time you disconnect from the RaspiBolt and connect again, if you are in a fresh session, before running any JoinMarket commands you need to do the following from "bitcoin" user:
+* Every time you disconnect from the RaspiBolt and connect again, if you are in a fresh session, before running any JoinMarket commands, you need to do the following from "bitcoin" user:
 ```
 $ cd /home/bitcoin/joinmarket-clientserver-0.5.0
 $ source jmvenv/bin/activate

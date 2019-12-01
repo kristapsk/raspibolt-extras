@@ -138,25 +138,12 @@ JoinMarket wallet contains five separate sub-wallets (accounts) or pockets calle
 ```
 $ python wallet-tool.py -m 0 wallet.jmdat
 Enter wallet decryption passphrase: 
-2019-11-10 18:57:09,247 [DEBUG]  rpc: listaddressgroupings []
 2019-11-10 18:57:09,377 [INFO]  Detected new wallet, performing initial import
-2019-11-10 18:57:09,377 [DEBUG]  requesting detailed wallet history
-2019-11-10 18:57:09,404 [DEBUG]  rpc: getaddressesbyaccount ['joinmarket-wallet-b72c33']
-2019-11-10 18:57:09,417 [DEBUG]  rpc: listlabels []
 restart Bitcoin Core with -rescan or use `bitcoin-cli rescanblockchain` if you're recovering an existing wallet from backup seed
 Otherwise just restart this joinmarket application.
 $ python wallet-tool.py -m 0 wallet.jmdat
 Enter wallet decryption passphrase: 
-2019-11-10 18:57:34,314 [DEBUG]  rpc: listaddressgroupings []
 2019-11-10 18:57:34,427 [INFO]  Detected new wallet, performing initial import
-2019-11-10 18:57:34,427 [DEBUG]  requesting detailed wallet history
-2019-11-10 18:57:34,453 [DEBUG]  rpc: getaddressesbyaccount ['joinmarket-wallet-b72c33']
-2019-11-10 18:57:34,453 [DEBUG]  rpc: listlabels []
-2019-11-10 18:57:34,455 [DEBUG]  rpc: getaddressesbylabel ['joinmarket-wallet-b72c33']
-2019-11-10 18:57:39,740 [DEBUG]  got used indices: {0: [0, 0], 1: [0, 0], 2: [0, 0], 3: [0, 0], 4: [0, 0]}
-2019-11-10 18:57:39,766 [DEBUG]  Wallet successfully synced
-2019-11-10 18:57:39,768 [DEBUG]  rpc: listunspent [0]
-2019-11-10 18:57:39,788 [DEBUG]  bitcoind sync_unspent took 0.020913124084472656sec
 JM wallet
 mixdepth        0       xpub6D52Hj7tztwBocht5MMAwW9nB4rD6KiFuqUtyR8Uzczna5m2TetrfHf5StgXQfp9n72SNKSwpMYYT7AzTTNds8yHpAyAwtzwgZkpG7yoNHs
 external addresses      m/49'/0'/0'/0   xpub6EywwThpb4GJTPDM3eQw1RVAeKZpR5cFsEfmVWK1DXrtZHkds77t7ixs1SezycsAvnm1SyogyzxMtcxASy8TZTSzXY6sZH81QcXhoB4dRJH

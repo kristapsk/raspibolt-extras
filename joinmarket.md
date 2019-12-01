@@ -74,7 +74,7 @@ $ source jmvenv/bin/activate
 Created a new `joinmarket.cfg`. Please review and adopt the settings and restart joinmarket.
 ```
 
-* Edit configuration file (`nano -w joinmarket.cfg`) and specify your bitcoind RPC settings. Optionally, if you have Tor enabled, comment out clearnet host entires under `[MESSAGING:server1]` and `[MESSAGING:server2]` and uncomment the ones with `.onion` addresses and `socks5 = true` (example below is for Tor enabled configuration).
+* Edit configuration file (`nano -w joinmarket.cfg`) and specify your bitcoind RPC settings. Optionally, if you have Tor enabled, comment out clearnet host entires and `socks5 = false` under `[MESSAGING:server1]` and `[MESSAGING:server2]` and uncomment the ones with `.onion` addresses and `socks5 = true` (example below is for Tor enabled configuration).
 ```
 [BLOCKCHAIN]
 #options: bitcoin-rpc, regtest, electrum-server
@@ -93,7 +93,7 @@ rpc_wallet_file =
 channel = joinmarket-pit
 port = 6697
 usessl = true
-socks5 = false
+#socks5 = false
 socks5_host = localhost
 socks5_port = 9050
 
@@ -106,7 +106,7 @@ socks5 = true
 channel = joinmarket-pit
 port = 6697
 usessl = true
-socks5 = false
+#socks5 = false
 socks5_host = localhost
 socks5_port = 9050
 

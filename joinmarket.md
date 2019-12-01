@@ -166,7 +166,7 @@ Yield generator is a maker bot that provides liquidity to the JoinMarket, so tha
 
 * Read the basics: https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/YIELDGENERATOR.md
 
-* Look at the settings (`nano -w yg-privacyenhanced.py`) and change them if you want to. Defaults could be ok, but you could also lower minium CoinJoin transaction amount (`minsize`) to 10000 sats (0.001 BTC, default is 100000 sats or 0.01 BTC). Also current relative CoinJoin maker fee (`cjfee_r`) default is 0.02%, you might want to rise it to 0.03%, as it is what Wasabi Wallet charges per anonimity set (`cjfee_r = 0.0003`). Note that values are approximations, yg-privacyenhanced will randomize them a little bit, due to privacy reasons.
+* Look at the settings (`nano -w yg-privacyenhanced.py`) and change them if you want to. Defaults could be ok, but you could also lower minium CoinJoin transaction amount (`minsize`) to 100000 sats (0.001 BTC, default is 1000000 sats or 0.01 BTC). Also current relative CoinJoin maker fee (`cjfee_r`) default is 0.02%, you might want to rise it to 0.03%, as it is what Wasabi Wallet charges per anonimity set (`cjfee_r = 0.0003`). Note that values are approximations, yg-privacyenhanced will randomize them a little bit, due to privacy reasons.
 
 * Run the yield generator
 ```

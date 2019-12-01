@@ -62,7 +62,7 @@ $ tar xvzf joinmarket-clientserver-0.6.0.tar.gz -C /home/bitcoin
 $ cd /home/bitcoin
 $ ln -s joinmarket-clientserver-0.6.0 joinmarket
 $ cd joinmarket
-$ ./install.sh --wihout-qt
+$ ./install.sh --without-qt
 ```
 
 ### First run

@@ -13,7 +13,7 @@
 * With user "admin", install necessary dependencies
 
 ```
-$ sudo apt-get install python-virtualenv curl python3-dev python3-pip build-essential automake pkg-config libtool libgmp-dev
+$ sudo apt-get install python-virtualenv curl python3-dev python3-pip build-essential automake pkg-config libtool libgmp-dev libltdl-dev libssl-dev
 ```
 
 #### Tor (optional)
@@ -32,11 +32,12 @@ It isn't strict requirement, but for the privacy it's recommended to use JoinMar
 # download software
 $ mkdir /home/bitcoin/download
 $ cd /home/bitcoin/download
-$ wget -O joinmarket-clientserver-0.5.5.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.5.5.tar.gz
-$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.5.5/joinmarket-clientserver-0.5.5.tar.gz.asc
+$ wget -O joinmarket-clientserver-0.6.0.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.6.0.tar.gz
+$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.6.0/joinmarket-clientserver-0.6.0.tar.gz.asc
 
 # verify that the release is signed by Adam Gibson (check the fingerprint)
 # fingerprint should match https://github.com/JoinMarket-Org/joinmarket-clientserver/releases
+$ wget https://raw.githubusercontent.com/JoinMarket-Org/joinmarket-clientserver/master/pubkeys/AdamGibson.asc
 $ gpg --import ./AdamGibson.asc
 gpg: keybox '/home/bitcoin/.gnupg/pubring.kbx' created
 gpg: key 141001A1AF77F20B: 1 signature not checked due to a missing key
@@ -45,25 +46,23 @@ gpg: key 141001A1AF77F20B: public key "Adam Gibson (CODE SIGNING KEY) <ekaggata@
 gpg: Total number processed: 1
 gpg:               imported: 1
 gpg: no ultimately trusted keys found
-$ gpg --verify joinmarket-clientserver-0.5.5.tar.gz.asc 
-gpg: assuming signed data in 'joinmarket-clientserver-0.5.5.tar.gz'
-gpg: Signature made Wed Aug 21 20:08:11 2019 EEST
-gpg:                using RSA key 141001A1AF77F20B
+$ gpg --verify joinmarket-clientserver-0.6.0.tar.gz.asc 
+gpg: assuming signed data in 'joinmarket-clientserver-0.6.0.tar.gz'
+gpg: Signature made Sat 30 Nov 2019 19:01:09 EET
+gpg:                using RSA key 2B6FC204D9BF332D062B461A141001A1AF77F20B
 gpg: Good signature from "Adam Gibson (CODE SIGNING KEY) <ekaggata@gmail.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: 2B6F C204 D9BF 332D 062B  461A 1410 01A1 AF77 F20B
 ```
 
-* Install JoinMarket (press "n" and Enter when asking about Qt dependencies)
+* Install JoinMarket
 ```
-$ tar xvzf joinmarket-clientserver-0.5.5.tar.gz -C /home/bitcoin
-$ cd /home/bitcoin/joinmarket-clientserver-0.5.5/
-$ ./install.sh 
-
-        INFO: Joinmarket-Qt for GUI Taker and Tumbler modes is available.
-        Install Qt dependencies (~160mb) ? [y|n] : n
-...
+$ tar xvzf joinmarket-clientserver-0.6.0.tar.gz -C /home/bitcoin
+$ cd /home/bitcoin
+$ ln -s joinmarket-clientserver-0.6.0 joinmarket
+$ cd joinmarket
+$ ./install.sh --wihout-qt
 ```
 
 ### First run
@@ -238,7 +237,7 @@ Tumbler is a program that do series of CoinJoin's with various amounts and timin
 
 * Every time you disconnect from the RaspiBolt and connect again, if you are in a fresh session, before running any JoinMarket commands, you need to do the following from "bitcoin" user:
 ```
-$ cd /home/bitcoin/joinmarket-clientserver-0.5.0
+$ cd /home/bitcoin/joinmarket
 $ source jmvenv/bin/activate
 (jmvenv) $ cd scripts
 ```

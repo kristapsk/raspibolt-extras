@@ -13,7 +13,7 @@
 * With user "admin", install necessary dependencies
 
 ```
-$ sudo apt-get install python-virtualenv curl python3-dev python3-pip build-essential automake pkg-config libtool libgmp-dev libltdl-dev libssl-dev
+$ sudo apt-get install python-virtualenv curl python3-dev python3-pip build-essential automake pkg-config libtool libgmp-dev libltdl-dev libssl-dev libatlas3-base
 ```
 
 #### Tor (optional)
@@ -187,7 +187,7 @@ $ tmux`
 ```
 * Start yield generator inside tmux session
 ```
-$ cd /home/bitcoin/joinmarket-clientserver-0.5.0
+$ cd /home/bitcoin/joinmarket
 $ source jmvenv/bin/activate
 (jmvenv) $ cd scripts
 (jmvenv) $ python yg-privacyenhanced.py wallet.jmdat

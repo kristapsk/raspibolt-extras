@@ -46,7 +46,7 @@ gpg: key 141001A1AF77F20B: public key "Adam Gibson (CODE SIGNING KEY) <ekaggata@
 gpg: Total number processed: 1
 gpg:               imported: 1
 gpg: no ultimately trusted keys found
-$ gpg --verify joinmarket-clientserver-0.6.0.tar.gz.asc
+$ gpg --verify joinmarket-clientserver-0.6.1.tar.gz.asc
 gpg: assuming signed data in 'joinmarket-clientserver-0.6.1.tar.gz'
 gpg: Signature made Tue 10 Dec 2019 14:40:53 EET
 gpg:                using RSA key 2B6FC204D9BF332D062B461A141001A1AF77F20B

@@ -233,7 +233,7 @@ The latest release can be found on the Github page of the JoinMarket project. Ma
 
 All this must be done from "bitcoin" user.
 
-* Stop yield generator but, if it is running.
+* Stop yield generator bot, if it is running.
 
 * Remove existing JoinMarket symlink: `unlink /home/bitcoin/joinmarket`
 

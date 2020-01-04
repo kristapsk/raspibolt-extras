@@ -77,7 +77,8 @@ Created a new `joinmarket.cfg`. Please review and adopt the settings and restart
 * Edit configuration file (`nano -w joinmarket.cfg`) and specify your bitcoind RPC settings. Optionally, if you have Tor enabled, comment out clearnet host entires and `socks5 = false` under `[MESSAGING:server1]` and `[MESSAGING:server2]` and uncomment the ones with `.onion` addresses and `socks5 = true` (example below is for Tor enabled configuration).
 ```
 [BLOCKCHAIN]
-#options: bitcoin-rpc, regtest
+#options: bitcoin-rpc, regtest, bitcoin-rpc-no-history
+# when using bitcoin-rpc-no-history remember to increase the gap limit to scan for more addresses, try -g 5000
 blockchain_source = bitcoin-rpc
 network = mainnet
 rpc_host = localhost

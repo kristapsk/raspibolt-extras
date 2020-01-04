@@ -16,6 +16,14 @@
 $ sudo apt-get install python-virtualenv curl python3-dev python3-pip build-essential automake pkg-config libtool libgmp-dev libltdl-dev libssl-dev libatlas3-base
 ```
 
+#### Create data directory
+
+* With user "admin", create data directory on external HDD (to save SD card from wear out)
+
+```
+$ mkdir /mnt/hdd/joinmarket
+```
+
 #### Tor (optional)
 
 It isn't strict requirement, but for the privacy it's recommended to use JoinMarket with Tor. Follow [RaspiBolt Tor guide](https://stadicus.github.io/RaspiBolt/raspibolt_69_tor.html) on how to install Tor on your RaspiBolt.
@@ -65,16 +73,22 @@ $ cd joinmarket
 $ ./install.sh --without-qt
 ```
 
+* Prepare data directory
+```
+$ ln -s /mnt/hdd/joinmarket /home/bitcoin/.joinmarket
+```
+
 ### First run
 
 ```
 $ source jmvenv/bin/activate
 (jmvenv) $ cd scripts
 (jmvenv) $ python wallet-tool.py
+User data will be stored and accessed in this location: /home/bitcoin/.joinmarket/
 Created a new `joinmarket.cfg`. Please review and adopt the settings and restart joinmarket.
 ```
 
-* Edit configuration file (`nano -w joinmarket.cfg`) and specify your bitcoind RPC settings. Optionally, if you have Tor enabled, comment out clearnet host entires and `socks5 = false` under `[MESSAGING:server1]` and `[MESSAGING:server2]` and uncomment the ones with `.onion` addresses and `socks5 = true` (example below is for Tor enabled configuration).
+* Edit configuration file (`nano -w /home/bitcoin/.joinmarket/joinmarket.cfg`) and specify your bitcoind RPC settings. Optionally, if you have Tor enabled, comment out clearnet host entires and `socks5 = false` under `[MESSAGING:server1]` and `[MESSAGING:server2]` and uncomment the ones with `.onion` addresses and `socks5 = true` (example below is for Tor enabled configuration).
 ```
 [BLOCKCHAIN]
 #options: bitcoin-rpc, regtest, bitcoin-rpc-no-history
@@ -116,6 +130,7 @@ socks5 = true
 ### Generate JoinMarket wallet
 ```
 (jvmenv) $ python wallet-tool.py generate
+User data will be stored and accessed in this location: /home/bitcoin/.joinmarket/
 Would you like to use a two-factor mnemonic recovery phrase? write 'n' if you don't know what this is (y/n): n
 Not using mnemonic extension
 Enter wallet file encryption passphrase: 
@@ -136,11 +151,13 @@ JoinMarket wallet contains five separate sub-wallets (accounts) or pockets calle
 * Run `wallet-tool.py` default method to get list of addresses. Send some bitcoins to the first address of mixdepth 0. At first run it will give a message about need to restart JM and rescan blockchain. No need to rescan, just run command again.
 ```
 $ python wallet-tool.py -m 0 wallet.jmdat
+User data will be stored and accessed in this location: /home/bitcoin/.joinmarket/
 Enter wallet decryption passphrase: 
 2019-11-10 18:57:09,377 [INFO]  Detected new wallet, performing initial import
 restart Bitcoin Core with -rescan or use `bitcoin-cli rescanblockchain` if you're recovering an existing wallet from backup seed
 Otherwise just restart this joinmarket application.
 $ python wallet-tool.py -m 0 wallet.jmdat
+User data will be stored and accessed in this location: /home/bitcoin/.joinmarket/
 Enter wallet decryption passphrase: 
 2019-11-10 18:57:34,427 [INFO]  Detected new wallet, performing initial import
 JM wallet

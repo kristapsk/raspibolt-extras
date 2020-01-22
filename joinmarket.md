@@ -1,5 +1,7 @@
 ## JoinMarket guide for RaspiBolt
 
+[![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@kristapsk/F0918E)](https://tippin.me/@kristapsk)
+
 (this guide is unfinished draft, work in progress)
 
 ### Introduction

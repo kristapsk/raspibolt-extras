@@ -18,6 +18,14 @@
 $ sudo apt-get install python-virtualenv curl python3-dev python3-pip build-essential automake pkg-config libtool libgmp-dev libltdl-dev libssl-dev libatlas3-base
 ```
 
+#### Create data directory
+
+* With user "admin", create data directory on external HDD (to save SD card from wear out)
+
+```
+$ mkdir /mnt/hdd/joinmarket
+```
+
 #### Tor (optional)
 
 It isn't strict requirement, but for the privacy it's recommended to use JoinMarket with Tor. Follow [RaspiBolt Tor guide](https://stadicus.github.io/RaspiBolt/raspibolt_69_tor.html) on how to install Tor on your RaspiBolt.
@@ -34,8 +42,8 @@ It isn't strict requirement, but for the privacy it's recommended to use JoinMar
 # download software
 $ mkdir /home/bitcoin/download
 $ cd /home/bitcoin/download
-$ wget -O joinmarket-clientserver-0.6.1.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.6.1.tar.gz
-$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.6.1/joinmarket-clientserver-0.6.1.tar.gz.asc
+$ wget -O joinmarket-clientserver-0.6.2.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.6.2.tar.gz
+$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.6.2/joinmarket-clientserver-0.6.2.tar.gz.asc
 
 # verify that the release is signed by Adam Gibson (check the fingerprint)
 # fingerprint should match https://github.com/JoinMarket-Org/joinmarket-clientserver/releases
@@ -48,9 +56,9 @@ gpg: key 141001A1AF77F20B: public key "Adam Gibson (CODE SIGNING KEY) <ekaggata@
 gpg: Total number processed: 1
 gpg:               imported: 1
 gpg: no ultimately trusted keys found
-$ gpg --verify joinmarket-clientserver-0.6.1.tar.gz.asc
-gpg: assuming signed data in 'joinmarket-clientserver-0.6.1.tar.gz'
-gpg: Signature made Tue 10 Dec 2019 14:40:53 EET
+$ gpg --verify joinmarket-clientserver-0.6.2.tar.gz.asc
+gpg: assuming signed data in 'joinmarket-clientserver-0.6.2.tar.gz'
+gpg: Signature made Mon 16 Mar 2020 21:27:23 EET
 gpg:                using RSA key 2B6FC204D9BF332D062B461A141001A1AF77F20B
 gpg: Good signature from "Adam Gibson (CODE SIGNING KEY) <ekaggata@gmail.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -60,11 +68,16 @@ Primary key fingerprint: 2B6F C204 D9BF 332D 062B  461A 1410 01A1 AF77 F20B
 
 * Install JoinMarket
 ```
-$ tar xvzf joinmarket-clientserver-0.6.1.tar.gz -C /home/bitcoin
+$ tar xvzf joinmarket-clientserver-0.6.2.tar.gz -C /home/bitcoin
 $ cd /home/bitcoin
-$ ln -s joinmarket-clientserver-0.6.1 joinmarket
+$ ln -s joinmarket-clientserver-0.6.2 joinmarket
 $ cd joinmarket
 $ ./install.sh --without-qt
+```
+
+* Prepare data directory
+```
+$ ln -s /mnt/hdd/joinmarket /home/bitcoin/.joinmarket
 ```
 
 ### First run
@@ -73,10 +86,11 @@ $ ./install.sh --without-qt
 $ source jmvenv/bin/activate
 (jmvenv) $ cd scripts
 (jmvenv) $ python wallet-tool.py
+User data will be stored and accessed in this location: /home/bitcoin/.joinmarket/
 Created a new `joinmarket.cfg`. Please review and adopt the settings and restart joinmarket.
 ```
 
-* Edit configuration file (`nano -w joinmarket.cfg`) and specify your bitcoind RPC settings. Optionally, if you have Tor enabled, comment out clearnet host entires and `socks5 = false` under `[MESSAGING:server1]` and `[MESSAGING:server2]` and uncomment the ones with `.onion` addresses and `socks5 = true` (example below is for Tor enabled configuration).
+* Edit configuration file (`nano -w /home/bitcoin/.joinmarket/joinmarket.cfg`) and specify your bitcoind RPC settings. Optionally, if you have Tor enabled, comment out clearnet host entires and `socks5 = false` under `[MESSAGING:server1]` and `[MESSAGING:server2]` and uncomment the ones with `.onion` addresses and `socks5 = true` (example below is for Tor enabled configuration).
 ```
 [BLOCKCHAIN]
 #options: bitcoin-rpc, regtest, bitcoin-rpc-no-history
@@ -90,34 +104,37 @@ rpc_password = rpcpassword
 rpc_wallet_file =
 
 [MESSAGING:server1]
-#host = irc.cyberguerrilla.org
-channel = joinmarket-pit
-port = 6697
-usessl = true
-#socks5 = false
-socks5_host = localhost
-socks5_port = 9050
-
-#for tor
-host = epynixtbonxn4odv34z4eqnlamnpuwfz6uwmsamcqd62si7cbix5hqad.onion
-socks5 = true
-
-[MESSAGING:server2]
 #host = irc.darkscience.net
 channel = joinmarket-pit
 port = 6697
 usessl = true
 #socks5 = false
-socks5_host = localhost
-socks5_port = 9050
+#socks5_host = localhost
+#socks5_port = 9050
 
 #for tor
 host = darksci3bfoka7tw.onion
+socks5 = true
+
+[MESSAGING:server2]
+#host = irc.hackint.org
+channel = joinmarket-pit
+#port = 6697
+#usessl = true
+#socks5 = false
+#socks5_host = localhost
+#socks5_port = 9050
+
+#for tor
+host = ncwkrwxpq2ikcngxq3dy2xctuheniggtqeibvgofixpzvrwpa77tozqd.onion
+port = 6667
+usessl = false
 socks5 = true
 ```
 ### Generate JoinMarket wallet
 ```
 (jvmenv) $ python wallet-tool.py generate
+User data will be stored and accessed in this location: /home/bitcoin/.joinmarket/
 Would you like to use a two-factor mnemonic recovery phrase? write 'n' if you don't know what this is (y/n): n
 Not using mnemonic extension
 Enter wallet file encryption passphrase: 
@@ -138,11 +155,13 @@ JoinMarket wallet contains five separate sub-wallets (accounts) or pockets calle
 * Run `wallet-tool.py` default method to get list of addresses. Send some bitcoins to the first address of mixdepth 0. At first run it will give a message about need to restart JM and rescan blockchain. No need to rescan, just run command again.
 ```
 $ python wallet-tool.py -m 0 wallet.jmdat
+User data will be stored and accessed in this location: /home/bitcoin/.joinmarket/
 Enter wallet decryption passphrase: 
 2019-11-10 18:57:09,377 [INFO]  Detected new wallet, performing initial import
 restart Bitcoin Core with -rescan or use `bitcoin-cli rescanblockchain` if you're recovering an existing wallet from backup seed
 Otherwise just restart this joinmarket application.
 $ python wallet-tool.py -m 0 wallet.jmdat
+User data will be stored and accessed in this location: /home/bitcoin/.joinmarket/
 Enter wallet decryption passphrase: 
 2019-11-10 18:57:34,427 [INFO]  Detected new wallet, performing initial import
 JM wallet

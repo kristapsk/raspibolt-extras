@@ -109,8 +109,8 @@ channel = joinmarket-pit
 port = 6697
 usessl = true
 #socks5 = false
-#socks5_host = localhost
-#socks5_port = 9050
+socks5_host = localhost
+socks5_port = 9050
 
 #for tor
 host = darksci3bfoka7tw.onion
@@ -122,8 +122,8 @@ channel = joinmarket-pit
 #port = 6697
 #usessl = true
 #socks5 = false
-#socks5_host = localhost
-#socks5_port = 9050
+socks5_host = localhost
+socks5_port = 9050
 
 #for tor
 host = ncwkrwxpq2ikcngxq3dy2xctuheniggtqeibvgofixpzvrwpa77tozqd.onion

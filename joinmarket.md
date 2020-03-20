@@ -263,8 +263,8 @@ All this must be done from "bitcoin" user.
 
 * Copy configuration and wallet file(s) from old JoinMarket directory to the new one (replace x.y.z with the version number of previous installed JoinMarket version, for example, 0.6.0):
 ```
-$ cp /home/bitcoin/joinmarket-x.y.z/scripts/joinmarket.cfg /home/bitcoin/joinmarket/scripts/
-$ cp /home/bitcoin/joinmarket-x.y.z/scripts/wallets/* /home/bitcoin/joinmarket/scripts/wallets/
+$ cp /home/bitcoin/joinmarket-x.y.z/scripts/joinmarket.cfg /home/bitcoin/.joinmarket/
+$ cp /home/bitcoin/joinmarket-x.y.z/scripts/wallets/* /home/bitcoin/.joinmarket/wallets/
 ```
 
 ### Useful links

@@ -21,7 +21,7 @@ $ sudo apt-get install python-virtualenv curl python3-dev python3-pip build-esse
 * With user "admin", create data directory on external HDD (to save SD card from wear out)
 
 ```
-$ mkdir /mnt/hdd/joinmarket
+$ mkdir /mnt/ext/joinmarket
 ```
 
 #### Tor (optional)
@@ -75,7 +75,7 @@ $ ./install.sh --without-qt
 
 * Prepare data directory
 ```
-$ ln -s /mnt/hdd/joinmarket /home/bitcoin/.joinmarket
+$ ln -s /mnt/ext/joinmarket /home/bitcoin/.joinmarket
 ```
 
 ### First run

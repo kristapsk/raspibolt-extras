@@ -2,8 +2,6 @@
 
 [![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@kristapsk/F0918E)](https://tippin.me/@kristapsk)
 
-(this guide is unfinished draft, work in progress)
-
 ### Introduction
 
 [JoinMarket](https://github.com/JoinMarket-Org/joinmarket-clientserver) is a CoinJoin software, which allows you to increase privacy and fungibility of on-chain Bitcoin transactions. It includes it's own Bitcoin wallet, backed by `bitcoind`, and uses market maker / market taker model, which means that either you pay small fee for having CoinJoin privacy fast (taker) or just keep software running and then you get paid for providing liquidity for CoinJoin's, in addition gaining privacy in a longer periods of time (maker). Even if you aren't interested in privacy of your coins, you can use JoinMarket for some little passive income from your bitcoins, without giving up your private keys. From my personal experience, currently earnings from running JoinMarket as a market maker (called yield generator bot) are bigger than what you get from routing Lightning Network payments (but still don't expect to get rich fast with that, will be less than 1% per year most likely).
@@ -184,6 +182,8 @@ Total balance:  0.00000000
 
 Yield generator is a maker bot that provides liquidity to the JoinMarket, so that others (takers) can make a CoinJoin's and they pay you a small fee for the service. It is recommended to fund your JoinMarket wallet with at least 0.1 BTC to run the yield generator. But the general principle is - the more funds you deposit in the wallet, the bigger chance of having passive CoinJoin transactions you have. But don't go reckless and remember that it is a hot wallet, so security is not the same as with a hardware wallet or other cold storage.
 
+In case you decide to run yield generator, it's wise to fund two or more addresses in the mixdepth 0 with some bitcoins. If you will only do one payment, your yield generator bot will not be able to continue to offer coins for mixing for some time after first coinjoin, because all the coins will be at unconfirmed state at that point.
+
 * Read the basics: https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/YIELDGENERATOR.md
 
 * Look at the settings (`nano -w yg-privacyenhanced.py`) and change them if you want to. Defaults could be ok, but you could also lower minium CoinJoin transaction amount (`minsize`) to 100000 sats (0.001 BTC, default is 1000000 sats or 0.01 BTC). Also current relative CoinJoin maker fee (`cjfee_r`) default is 0.02%, you might want to rise it to 0.03%, as it is what Wasabi Wallet charges per anonimity set (`cjfee_r = 0.0003`). Note that values are approximations, yg-privacyenhanced will randomize them a little bit, due to privacy reasons.
@@ -236,7 +236,7 @@ Mixing maker and taker roles in a single wallet is actually good for your privac
 
 ### Running the tumbler
 
-Tumbler is a program that do series of CoinJoin's with various amounts and timing between them, to completely break the link between different addresses.
+Tumbler is a program that do series of CoinJoin's with various amounts and timing between them, to completely break the link between different addresses. Basic idea is that you can run yield generator to mix your coins slowly and get fees or your run tumbler to mix your coins faster and then you pay fees to the market makers.
 
 * See https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/tumblerguide.md
 

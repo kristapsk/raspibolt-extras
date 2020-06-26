@@ -48,7 +48,7 @@ The `5rraorbx5dd3cuutxcue36cp4oschvlmltzzelzlr7yokf2m77h5vgyd.onion` in this exa
 
 You must have Tor running and netcat (`nc` command) installed on your machine.
 
-* Create or modify `~/.ssh/config` and add following lines to it:
+* Create or modify `~/.ssh/config` (`mkdir -p ~/.ssh; nano -w ~/.ssh/config`) and add following lines to it:
 ```
 Host *.onion
     ProxyCommand nc -xlocalhost:9050 -X5 %h %p
@@ -57,6 +57,22 @@ Host *.onion
 * Now you should be able to connect to your RaspiBolt via SSH hidden service:
 ```
 $ ssh admin@5rraorbx5dd3cuutxcue36cp4oschvlmltzzelzlr7yokf2m77h5vgyd.onion
+```
+
+#### Adding alias to SSH configuration
+
+Remembering .onion hidden service name is hard, you can simplify connecting by adding alias to your SSH configuration.
+
+* Add following lines to the `~/.ssh/config` file (`nano -w ~/.ssh/config`):
+```
+Host raspibolt
+    HostName 5rraorbx5dd3cuutxcue36cp4oschvlmltzzelzlr7yokf2m77h5vgyd.onion
+    ProxyCommand nc -xlocalhost:9050 -X5 %h %p
+```
+
+* Now you should be able to connect to your RaspiBolt with shorter command:
+```
+$ ssh admin@raspibolt
 ```
 
 ### Connecting to your RaspiBolt via Tor from Windows

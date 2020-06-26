@@ -5,3 +5,4 @@
 Additional tutorials for [RaspiBolt](https://stadicus.github.io/RaspiBolt/).
 
 * [JoinMarket on the RaspiBolt](joinmarket.md)
+* [SSHD as a Hidden Service with Tor on a RaspiBolt](sshd-as-a-hidden-service-with-tor.md)

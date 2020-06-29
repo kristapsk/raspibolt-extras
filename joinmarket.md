@@ -56,7 +56,7 @@ gpg:               imported: 1
 gpg: no ultimately trusted keys found
 $ gpg --verify joinmarket-clientserver-0.6.3.1.tar.gz.asc
 gpg: assuming signed data in 'joinmarket-clientserver-0.6.3.1.tar.gz'
-gpg: Signature made Mon Jun 29 21:02:50 2020 EEST
+gpg: Signature made Mon 29 Jun 2020 21:02:50 EEST
 gpg:                using RSA key 2B6FC204D9BF332D062B461A141001A1AF77F20B
 gpg: Good signature from "Adam Gibson (CODE SIGNING KEY) <ekaggata@gmail.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!

@@ -40,8 +40,8 @@ It isn't strict requirement, but for the privacy it's recommended to use JoinMar
 # download software
 $ mkdir /home/bitcoin/download
 $ cd /home/bitcoin/download
-$ wget -O joinmarket-clientserver-0.6.3.1.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.6.3.1.tar.gz
-$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.6.3.1/joinmarket-clientserver-0.6.3.1.tar.gz.asc
+$ wget -O joinmarket-clientserver-0.7.0.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.7.0.tar.gz
+$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.7.0/joinmarket-clientserver-0.7.0.tar.gz.asc
 
 # verify that the release is signed by Adam Gibson (check the fingerprint)
 # fingerprint should match https://github.com/JoinMarket-Org/joinmarket-clientserver/releases
@@ -54,9 +54,9 @@ gpg: key 141001A1AF77F20B: public key "Adam Gibson (CODE SIGNING KEY) <ekaggata@
 gpg: Total number processed: 1
 gpg:               imported: 1
 gpg: no ultimately trusted keys found
-$ gpg --verify joinmarket-clientserver-0.6.3.1.tar.gz.asc
-gpg: assuming signed data in 'joinmarket-clientserver-0.6.3.1.tar.gz'
-gpg: Signature made Mon 29 Jun 2020 21:02:50 EEST
+$ gpg --verify joinmarket-clientserver-0.7.0.tar.gz.asc
+gpg: assuming signed data in 'joinmarket-clientserver-0.7.0.tar.gz'
+gpg: Signature made Thu 20 Aug 2020 22:19:53 EEST
 gpg:                using RSA key 2B6FC204D9BF332D062B461A141001A1AF77F20B
 gpg: Good signature from "Adam Gibson (CODE SIGNING KEY) <ekaggata@gmail.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -66,9 +66,9 @@ Primary key fingerprint: 2B6F C204 D9BF 332D 062B  461A 1410 01A1 AF77 F20B
 
 * Install JoinMarket
 ```
-$ tar xvzf joinmarket-clientserver-0.6.3.1.tar.gz -C /home/bitcoin
+$ tar xvzf joinmarket-clientserver-0.7.0.tar.gz -C /home/bitcoin
 $ cd /home/bitcoin
-$ ln -s joinmarket-clientserver-0.6.3.1 joinmarket
+$ ln -s joinmarket-clientserver-0.7.0 joinmarket
 $ cd joinmarket
 $ ./install.sh --without-qt
 ```
@@ -186,7 +186,7 @@ In case you decide to run yield generator, it's wise to fund two or more address
 
 * Read the basics: https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/YIELDGENERATOR.md
 
-* Look at the settings (`nano -w yg-privacyenhanced.py`) and change them if you want to. Defaults could be ok, but you could also lower minium CoinJoin transaction amount (`minsize`) to 100000 sats (0.001 BTC, default is 1000000 sats or 0.01 BTC). Also current relative CoinJoin maker fee (`cjfee_r`) default is 0.02%, you might want to rise it to 0.03%, as it is what Wasabi Wallet charges per anonimity set (`cjfee_r = 0.0003`). Note that values are approximations, yg-privacyenhanced will randomize them a little bit, due to privacy reasons.
+* Look at the settings (`nano -w yg-privacyenhanced.py`) and change them if you want to. Defaults should be ok, but you could, for example, raise relative CoinJoin maker fee (`cjfee_r`) from 0.02% to 0.03%, as it is what Wasabi Wallet currently charges per anonimity set (`cjfee_r = 0.0003`). Note that values are approximations, yg-privacyenhanced will randomize them a little bit, for privacy reasons.
 
 * Run the yield generator
 ```
@@ -260,6 +260,8 @@ All this must be done from "bitcoin" user.
 * Remove existing JoinMarket symlink: `unlink /home/bitcoin/joinmarket`
 
 * Download, verify, extract and install the JoinMarket as described in the [Install JoinMarket](#install-joinmarket) section of this guide.
+
+* Optionally delete old JoinMarket version directory (will save few hundred megabytes on SD card).
 
 ### Useful links
 

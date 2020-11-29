@@ -13,7 +13,7 @@
 * With user "admin", install necessary dependencies
 
 ```
-$ sudo apt-get install python-virtualenv curl python3-dev python3-pip build-essential automake pkg-config libtool libgmp-dev libltdl-dev libssl-dev libatlas3-base
+$ sudo apt-get install python-virtualenv curl python3-dev python3-pip build-essential automake pkg-config libtool libgmp-dev libltdl-dev libssl-dev libatlas3-base libopenjp2-7
 ```
 
 #### Create data directory
@@ -40,8 +40,8 @@ It isn't strict requirement, but for the privacy it's recommended to use JoinMar
 # download software
 $ mkdir -p /home/bitcoin/download
 $ cd /home/bitcoin/download
-$ wget -O joinmarket-clientserver-0.7.2.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.7.2.tar.gz
-$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.7.2/joinmarket-clientserver-0.7.2.tar.gz.asc
+$ wget -O joinmarket-clientserver-0.8.0.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.8.0.tar.gz
+$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.8.0/joinmarket-clientserver-0.8.0.tar.gz.asc
 
 # verify that the release is signed by Adam Gibson (check the fingerprint)
 # fingerprint should match https://github.com/JoinMarket-Org/joinmarket-clientserver/releases
@@ -54,8 +54,8 @@ gpg: key 141001A1AF77F20B: public key "Adam Gibson (CODE SIGNING KEY) <ekaggata@
 gpg: Total number processed: 1
 gpg:               imported: 1
 gpg: no ultimately trusted keys found
-$ gpg --verify joinmarket-clientserver-0.7.2.tar.gz.asc
-gpg: assuming signed data in 'joinmarket-clientserver-0.7.2.tar.gz'
+$ gpg --verify joinmarket-clientserver-0.8.0.tar.gz.asc
+gpg: assuming signed data in 'joinmarket-clientserver-0.8.0.tar.gz'
 gpg: Signature made Tue 27 Oct 2020 14:23:11 EET
 gpg:                using RSA key 2B6FC204D9BF332D062B461A141001A1AF77F20B
 gpg: Good signature from "Adam Gibson (CODE SIGNING KEY) <ekaggata@gmail.com>" [unknown]
@@ -66,9 +66,9 @@ Primary key fingerprint: 2B6F C204 D9BF 332D 062B  461A 1410 01A1 AF77 F20B
 
 * Install JoinMarket
 ```
-$ tar xvzf joinmarket-clientserver-0.7.2.tar.gz -C /home/bitcoin
+$ tar xvzf joinmarket-clientserver-0.8.0.tar.gz -C /home/bitcoin
 $ cd /home/bitcoin
-$ ln -s joinmarket-clientserver-0.7.2 joinmarket
+$ ln -s joinmarket-clientserver-0.8.0 joinmarket
 $ cd joinmarket
 $ ./install.sh --without-qt
 ```

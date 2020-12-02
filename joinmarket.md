@@ -40,8 +40,8 @@ It isn't strict requirement, but for the privacy it's recommended to use JoinMar
 # download software
 $ mkdir -p /home/bitcoin/download
 $ cd /home/bitcoin/download
-$ wget -O joinmarket-clientserver-0.7.2.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.7.2.tar.gz
-$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.7.2/joinmarket-clientserver-0.7.2.tar.gz.asc
+$ wget -O joinmarket-clientserver-0.8.0.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.8.0.tar.gz
+$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.8.0/joinmarket-clientserver-0.8.0.tar.gz.asc
 
 # verify that the release is signed by Adam Gibson (check the fingerprint)
 # fingerprint should match https://github.com/JoinMarket-Org/joinmarket-clientserver/releases
@@ -54,9 +54,9 @@ gpg: key 141001A1AF77F20B: public key "Adam Gibson (CODE SIGNING KEY) <ekaggata@
 gpg: Total number processed: 1
 gpg:               imported: 1
 gpg: no ultimately trusted keys found
-$ gpg --verify joinmarket-clientserver-0.7.2.tar.gz.asc
-gpg: assuming signed data in 'joinmarket-clientserver-0.7.2.tar.gz'
-gpg: Signature made Tue 27 Oct 2020 14:23:11 EET
+$ gpg --verify joinmarket-clientserver-0.8.0.tar.gz.asc
+gpg: assuming signed data in 'joinmarket-clientserver-0.8.0.tar.gz'
+gpg: Signature made Fri 27 Nov 2020 16:11:59 EET
 gpg:                using RSA key 2B6FC204D9BF332D062B461A141001A1AF77F20B
 gpg: Good signature from "Adam Gibson (CODE SIGNING KEY) <ekaggata@gmail.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -66,14 +66,16 @@ Primary key fingerprint: 2B6F C204 D9BF 332D 062B  461A 1410 01A1 AF77 F20B
 
 * Install JoinMarket
 ```
-$ tar xvzf joinmarket-clientserver-0.7.2.tar.gz -C /home/bitcoin
+$ tar xvzf joinmarket-clientserver-0.8.0.tar.gz -C /home/bitcoin
+$ rm joinmarket-clientserver-0.8.0.tar.gz*
 $ cd /home/bitcoin
-$ ln -s joinmarket-clientserver-0.7.2 joinmarket
+$ ln -s joinmarket-clientserver-0.8.0 joinmarket
 $ cd joinmarket
-$ ./install.sh --without-qt
+$ ./install.sh --without-qt --disable-secp-check
 ```
 
-* Prepare data directory
+### Prepare data directory
+
 ```
 $ ln -s /mnt/ext/joinmarket /home/bitcoin/.joinmarket
 ```
@@ -140,7 +142,7 @@ Reenter wallet file encryption passphrase:
 Input wallet file name (default: wallet.jmdat): 
 Write down this wallet recovery mnemonic
 
-hour embark smile mansion wisdom rebel loud enhance clean man panel broccoli
+power legend cattle tilt sphere liberty canoe angle click best weasel draft
 
 Generated wallet OK
 ```
@@ -155,24 +157,24 @@ JoinMarket wallet contains five separate sub-wallets (accounts) or pockets calle
 $ python wallet-tool.py -m 0 wallet.jmdat
 User data will be stored and accessed in this location: /home/bitcoin/.joinmarket/
 Enter wallet decryption passphrase: 
-2019-11-10 18:57:09,377 [INFO]  Detected new wallet, performing initial import
+2020-11-30 23:18:30,322 [INFO]  Detected new wallet, performing initial import
 restart Bitcoin Core with -rescan or use `bitcoin-cli rescanblockchain` if you're recovering an existing wallet from backup seed
 Otherwise just restart this joinmarket application.
 $ python wallet-tool.py -m 0 wallet.jmdat
 User data will be stored and accessed in this location: /home/bitcoin/.joinmarket/
 Enter wallet decryption passphrase: 
-2019-11-10 18:57:34,427 [INFO]  Detected new wallet, performing initial import
+2020-11-30 23:19:05,030 [INFO]  Detected new wallet, performing initial import
 JM wallet
-mixdepth        0       xpub6D52Hj7tztwBocht5MMAwW9nB4rD6KiFuqUtyR8Uzczna5m2TetrfHf5StgXQfp9n72SNKSwpMYYT7AzTTNds8yHpAyAwtzwgZkpG7yoNHs
-external addresses      m/49'/0'/0'/0   xpub6EywwThpb4GJTPDM3eQw1RVAeKZpR5cFsEfmVWK1DXrtZHkds77t7ixs1SezycsAvnm1SyogyzxMtcxASy8TZTSzXY6sZH81QcXhoB4dRJH
-m/49'/0'/0'/0/0         3BWEZFFjPcM2j9BjM6pQBYKqLZaVYxpyJF      0.00000000      new
-m/49'/0'/0'/0/1         3Md9siWt7VJcgZfqyrQBNGHXmSpz2msUQY      0.00000000      new
-m/49'/0'/0'/0/2         3DDf79zYDFX8WuVuMQAt2GWDKd4RGQX6dV      0.00000000      new
-m/49'/0'/0'/0/3         36jar4xRAbPFTyqzV7RvYNpdmAtmwn9ENi      0.00000000      new
-m/49'/0'/0'/0/4         3PfXrrLeNMifDuWv1KR4bz2p29XyoY6m8d      0.00000000      new
-m/49'/0'/0'/0/5         3J5BsmfBtG2ULTPMZBC7vuNzRBCgWyaZ8x      0.00000000      new
+mixdepth        0       xpub6CDKnjyTPcNJHuEFWRWtPHa7dHrj63BkEHtK7P12LxwMN4v5V4LN36MpVqPRc5W72Xfwh9rUnmuZVW1QQbnLuAoNA3rkSDULJLL4fdiZkDN
+external addresses      m/84'/0'/0'/0   xpub6FCe4n1EyN3S7CgyLxz2hegoPnythF7XDiZMEZ1FcqQpoVhyvxhLMT2BVJ7kB5AZAgmBhmauqruguGr6ffoMAzGG2TNh1gas6CWzxpDBHz9
+m/84'/0'/0'/0/0         bc1q8s5jp8jawmdcj2l3dfl58lpspzphzpxdljj9f5      0.00000000      new
+m/84'/0'/0'/0/1         bc1qevtwlh9xw8u87qlxfwu9dzw728jatena6rf7za      0.00000000      new
+m/84'/0'/0'/0/2         bc1q0400y8k5453pfmezuc3gv34dhkslk3qkkyjdhl      0.00000000      new
+m/84'/0'/0'/0/3         bc1qdfy2gszf2uztm4x5s5ysatd34tvkfe5rn53c5g      0.00000000      new
+m/84'/0'/0'/0/4         bc1q4wmdjd8g76qr49lc9l9v4scnjtmxhpek9l076p      0.00000000      new
+m/84'/0'/0'/0/5         bc1qv7ju4jfydnxnz36gecfy675600leyz8klwp2jt      0.00000000      new
 Balance:        0.00000000
-internal addresses      m/49'/0'/0'/1
+internal addresses      m/84'/0'/0'/1
 Balance:        0.00000000
 Balance for mixdepth 0: 0.00000000
 Total balance:  0.00000000
@@ -252,6 +254,8 @@ $ source jmvenv/bin/activate
 ### How to upgrade
 
 The latest release can be found on the Github page of the JoinMarket project. Make sure to read the Release Notes, as these can include important upgrade information. https://github.com/JoinMarket-Org/joinmarket-clientserver/releases
+
+If upgrading from pre-0.8.0 to a newer versions, note that default wallet type is changed from p2sh-p2wpkh nested segwit (Bitcoin addresses start with 3) to bech32 p2wpkh native segwit (Bitcoin addresses start with bc1). See [native segwit upgrade guide](https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/NATIVE-SEGWIT-UPGRADE.md) for details.
 
 All this must be done from "bitcoin" user.
 

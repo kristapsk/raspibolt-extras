@@ -188,7 +188,7 @@ In case you decide to run yield generator, it's wise to fund two or more address
 
 * Read the basics: https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/YIELDGENERATOR.md
 
-* Look at the settings (`nano -w yg-privacyenhanced.py`) and change them if you want to. Defaults should be ok, but you could, for example, raise relative CoinJoin maker fee (`cjfee_r`) from 0.02% to 0.03%, as it is what Wasabi Wallet currently charges per anonimity set (`cjfee_r = 0.0003`). Note that values are approximations, yg-privacyenhanced will randomize them a little bit, for privacy reasons.
+* Look at the settings (`nano -w yg-privacyenhanced.py`) and change them if you want to. Defaults should be ok, but you could, for example, raise relative CoinJoin maker fee (`cjfee_r`) from 0.002% to 0.003%, as it is what Wasabi Wallet currently charges per anonimity set (`cjfee_r = 0.00003`). Note that values are approximations, yg-privacyenhanced will randomize them a little bit, for privacy reasons.
 
 * Run the yield generator
 ```

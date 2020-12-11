@@ -195,7 +195,7 @@ In case you decide to run yield generator, it's wise to fund two or more address
 (jmvenv) $ python yg-privacyenhanced.py wallet.jmdat
 ```
 
-#### Running the yield generator in background (after you close ssh connection to the RaspiBolt
+#### Running the yield generator in background (after you close ssh connection to the RaspiBolt)
 
 * Install tmux from the "admin" user
 

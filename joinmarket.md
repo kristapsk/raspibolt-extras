@@ -40,8 +40,8 @@ It isn't strict requirement, but for the privacy it's recommended to use JoinMar
 # download software
 $ mkdir -p /home/bitcoin/download
 $ cd /home/bitcoin/download
-$ wget -O joinmarket-clientserver-0.8.0.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.8.0.tar.gz
-$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.8.0/joinmarket-clientserver-0.8.0.tar.gz.asc
+$ wget -O joinmarket-clientserver-0.8.1.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.8.1.tar.gz
+$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.8.1/joinmarket-clientserver-0.8.1.tar.gz.asc
 
 # verify that the release is signed by Adam Gibson (check the fingerprint)
 # fingerprint should match https://github.com/JoinMarket-Org/joinmarket-clientserver/releases
@@ -54,9 +54,9 @@ gpg: key 141001A1AF77F20B: public key "Adam Gibson (CODE SIGNING KEY) <ekaggata@
 gpg: Total number processed: 1
 gpg:               imported: 1
 gpg: no ultimately trusted keys found
-$ gpg --verify joinmarket-clientserver-0.8.0.tar.gz.asc
-gpg: assuming signed data in 'joinmarket-clientserver-0.8.0.tar.gz'
-gpg: Signature made Fri 27 Nov 2020 16:11:59 EET
+$ gpg --verify joinmarket-clientserver-0.8.1.tar.gz.asc
+gpg: assuming signed data in 'joinmarket-clientserver-0.8.1.tar.gz'
+gpg: Signature made Wed 10 Feb 2021 01:44:18 EET
 gpg:                using RSA key 2B6FC204D9BF332D062B461A141001A1AF77F20B
 gpg: Good signature from "Adam Gibson (CODE SIGNING KEY) <ekaggata@gmail.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -66,11 +66,12 @@ Primary key fingerprint: 2B6F C204 D9BF 332D 062B  461A 1410 01A1 AF77 F20B
 
 * Install JoinMarket
 ```
-$ tar xvzf joinmarket-clientserver-0.8.0.tar.gz -C /home/bitcoin
-$ rm joinmarket-clientserver-0.8.0.tar.gz*
+$ tar xvzf joinmarket-clientserver-0.8.1.tar.gz -C /home/bitcoin
+$ rm joinmarket-clientserver-0.8.1.tar.gz*
 $ cd /home/bitcoin
-$ ln -s joinmarket-clientserver-0.8.0 joinmarket
+$ ln -s joinmarket-clientserver-0.8.1 joinmarket
 $ cd joinmarket
+$ sed -i "s#txtorcon#txtorcon', 'cryptography==3.3.2#g" jmdaemon/setup.py
 $ ./install.sh --without-qt --disable-secp-check
 ```
 
@@ -188,7 +189,7 @@ In case you decide to run yield generator, it's wise to fund two or more address
 
 * Read the basics: https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/YIELDGENERATOR.md
 
-* Look at the settings (`nano -w yg-privacyenhanced.py`) and change them if you want to. Defaults should be ok, but you could, for example, raise relative CoinJoin maker fee (`cjfee_r`) from 0.002% to 0.003%, as it is what Wasabi Wallet currently charges per anonimity set (`cjfee_r = 0.00003`). Note that values are approximations, yg-privacyenhanced will randomize them a little bit, for privacy reasons.
+* Look at the settings (`nano -w /home/bitcoin/.joinmarket/joinmarket.cfg`) and change them if you want to. Defaults should be ok, but you could, for example, raise relative CoinJoin maker fee (`cjfee_r`) from 0.002% to 0.003%, as it is what Wasabi Wallet currently charges per anonimity set (`cjfee_r = 0.00003`). Note that values are approximations, yg-privacyenhanced will randomize them a little bit, for privacy reasons.
 
 * Run the yield generator
 ```
@@ -256,6 +257,8 @@ $ source jmvenv/bin/activate
 The latest release can be found on the Github page of the JoinMarket project. Make sure to read the Release Notes, as these can include important upgrade information. https://github.com/JoinMarket-Org/joinmarket-clientserver/releases
 
 If upgrading from pre-0.8.0 to a newer versions, note that default wallet type is changed from p2sh-p2wpkh nested segwit (Bitcoin addresses start with 3) to bech32 p2wpkh native segwit (Bitcoin addresses start with bc1). See [native segwit upgrade guide](https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/NATIVE-SEGWIT-UPGRADE.md) for details.
+
+If upgrading from pre-0.8.1 to a newer versions, note that yield generator configuration has been moved from the yield generator script (e.g. `yg-privacyenhanced.py`) to a `joinmarket.cfg`, see [0.8.1 release notes](https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/release-notes/release-notes-0.8.1.md). Backing up and then recreating a default `joinmarket.cfg` file is always a good idea for a new release; make sure to do it for this release, so that all default values and comments are populated. A couple of new config settings now exist, which you should take note of.
 
 All this must be done from "bitcoin" user.
 

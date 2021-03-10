@@ -40,8 +40,8 @@ It isn't strict requirement, but for the privacy it's recommended to use JoinMar
 # download software
 $ mkdir -p /home/bitcoin/download
 $ cd /home/bitcoin/download
-$ wget -O joinmarket-clientserver-0.8.1.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.8.1.tar.gz
-$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.8.1/joinmarket-clientserver-0.8.1.tar.gz.asc
+$ wget -O joinmarket-clientserver-0.8.2.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.8.2.tar.gz
+$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.8.2/joinmarket-clientserver-0.8.2.tar.gz.asc
 
 # verify that the release is signed by Adam Gibson (check the fingerprint)
 # fingerprint should match https://github.com/JoinMarket-Org/joinmarket-clientserver/releases
@@ -54,9 +54,9 @@ gpg: key 141001A1AF77F20B: public key "Adam Gibson (CODE SIGNING KEY) <ekaggata@
 gpg: Total number processed: 1
 gpg:               imported: 1
 gpg: no ultimately trusted keys found
-$ gpg --verify joinmarket-clientserver-0.8.1.tar.gz.asc
-gpg: assuming signed data in 'joinmarket-clientserver-0.8.1.tar.gz'
-gpg: Signature made Wed 10 Feb 2021 01:44:18 EET
+$ gpg --verify joinmarket-clientserver-0.8.2.tar.gz.asc
+gpg: assuming signed data in 'joinmarket-clientserver-0.8.2.tar.gz'
+gpg: Signature made Tue 09 Mar 2021 15:09:28 EET
 gpg:                using RSA key 2B6FC204D9BF332D062B461A141001A1AF77F20B
 gpg: Good signature from "Adam Gibson (CODE SIGNING KEY) <ekaggata@gmail.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -66,12 +66,11 @@ Primary key fingerprint: 2B6F C204 D9BF 332D 062B  461A 1410 01A1 AF77 F20B
 
 * Install JoinMarket
 ```
-$ tar xvzf joinmarket-clientserver-0.8.1.tar.gz -C /home/bitcoin
-$ rm joinmarket-clientserver-0.8.1.tar.gz*
+$ tar xvzf joinmarket-clientserver-0.8.2.tar.gz -C /home/bitcoin
+$ rm joinmarket-clientserver-0.8.2.tar.gz*
 $ cd /home/bitcoin
-$ ln -s joinmarket-clientserver-0.8.1 joinmarket
+$ ln -s joinmarket-clientserver-0.8.2 joinmarket
 $ cd joinmarket
-$ sed -i "s#txtorcon#txtorcon', 'cryptography==3.3.2#g" jmdaemon/setup.py
 $ ./install.sh --without-qt --disable-secp-check
 ```
 

@@ -40,9 +40,8 @@ It isn't strict requirement, but for the privacy it's recommended to use JoinMar
 # download software
 $ mkdir -p /home/bitcoin/download
 $ cd /home/bitcoin/download
-$ wget -O joinmarket-clientserver-0.8.3.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.8.3.tar.gz
-$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.8.3/joinmarket-clientserver-0.8.3.tar.gz.asc
-
+$ wget -O joinmarket-clientserver-0.9.0.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.9.0.tar.gz
+$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.9.0/joinmarket-clientserver-0.9.0.tar.gz.asc
 # verify that the release is signed by Adam Gibson (check the fingerprint)
 # fingerprint should match https://github.com/JoinMarket-Org/joinmarket-clientserver/releases
 $ wget https://raw.githubusercontent.com/JoinMarket-Org/joinmarket-clientserver/master/pubkeys/AdamGibson.asc
@@ -54,9 +53,9 @@ gpg: key 141001A1AF77F20B: public key "Adam Gibson (CODE SIGNING KEY) <ekaggata@
 gpg: Total number processed: 1
 gpg:               imported: 1
 gpg: no ultimately trusted keys found
-$ gpg --verify joinmarket-clientserver-0.8.3.tar.gz.asc
-gpg: assuming signed data in 'joinmarket-clientserver-0.8.3.tar.gz'
-gpg: Signature made Fri 18 Jun 2021 22:57:41 EEST
+$ gpg --verify joinmarket-clientserver-0.9.0.tar.gz.asc
+gpg: assuming signed data in 'joinmarket-clientserver-0.9.0.tar.gz'
+gpg: Signature made Sat 31 Jul 2021 17:52:31 EEST
 gpg:                using RSA key 2B6FC204D9BF332D062B461A141001A1AF77F20B
 gpg: Good signature from "Adam Gibson (CODE SIGNING KEY) <ekaggata@gmail.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -66,10 +65,10 @@ Primary key fingerprint: 2B6F C204 D9BF 332D 062B  461A 1410 01A1 AF77 F20B
 
 * Install JoinMarket
 ```
-$ tar xvzf joinmarket-clientserver-0.8.3.tar.gz -C /home/bitcoin
-$ rm joinmarket-clientserver-0.8.3.tar.gz*
+$ tar xvzf joinmarket-clientserver-0.9.0.tar.gz -C /home/bitcoin
+$ rm joinmarket-clientserver-0.9.0.tar.gz*
 $ cd /home/bitcoin
-$ ln -s joinmarket-clientserver-0.8.3 joinmarket
+$ ln -s joinmarket-clientserver-0.9.0 joinmarket
 $ cd joinmarket
 $ ./install.sh --without-qt --disable-secp-check
 ```
@@ -194,6 +193,8 @@ In case you decide to run yield generator, it's wise to fund two or more address
 ```
 (jmvenv) $ python yg-privacyenhanced.py wallet.jmdat
 ```
+
+Since version 0.9.0 JoinMarket has added support for fidelity bonds, which are bitcoins locked into certain address(es) for some time. This is protection against [sybil attacks](https://en.wikipedia.org/wiki/Sybil_attack). Fidelity bonds are not currently required for the makers, but they will increase probability of your yield generator bot to participate in coinjoins. See [JoinMarket fidelity bond documentation](https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/fidelity-bonds.md) for more information.
 
 #### Running the yield generator in background (after you close ssh connection to the RaspiBolt)
 

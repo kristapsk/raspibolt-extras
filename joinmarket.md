@@ -70,6 +70,8 @@ $ rm joinmarket-clientserver-0.9.0.tar.gz*
 $ cd /home/bitcoin
 $ ln -s joinmarket-clientserver-0.9.0 joinmarket
 $ cd joinmarket
+$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/commit/f9ea973be90d5ecd488bb89ddb60ec01ebf31cf2.patch
+$ patch -p1 < f9ea973be90d5ecd488bb89ddb60ec01ebf31cf2.patch
 $ ./install.sh --without-qt --disable-secp-check
 ```
 

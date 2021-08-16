@@ -40,8 +40,8 @@ It isn't strict requirement, but for the privacy it's recommended to use JoinMar
 # download software
 $ mkdir -p /home/bitcoin/download
 $ cd /home/bitcoin/download
-$ wget -O joinmarket-clientserver-0.9.0.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.9.0.tar.gz
-$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.9.0/joinmarket-clientserver-0.9.0.tar.gz.asc
+$ wget -O joinmarket-clientserver-0.9.1.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.9.1.tar.gz
+$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.9.1/joinmarket-clientserver-0.9.1.tar.gz.asc
 # verify that the release is signed by Adam Gibson (check the fingerprint)
 # fingerprint should match https://github.com/JoinMarket-Org/joinmarket-clientserver/releases
 $ wget https://raw.githubusercontent.com/JoinMarket-Org/joinmarket-clientserver/master/pubkeys/AdamGibson.asc
@@ -53,9 +53,9 @@ gpg: key 141001A1AF77F20B: public key "Adam Gibson (CODE SIGNING KEY) <ekaggata@
 gpg: Total number processed: 1
 gpg:               imported: 1
 gpg: no ultimately trusted keys found
-$ gpg --verify joinmarket-clientserver-0.9.0.tar.gz.asc
-gpg: assuming signed data in 'joinmarket-clientserver-0.9.0.tar.gz'
-gpg: Signature made Sat 31 Jul 2021 17:52:31 EEST
+$ gpg --verify joinmarket-clientserver-0.9.1.tar.gz.asc
+gpg: assuming signed data in 'joinmarket-clientserver-0.9.1.tar.gz'
+gpg: Signature made Fri 13 Aug 2021 19:17:55 EEST
 gpg:                using RSA key 2B6FC204D9BF332D062B461A141001A1AF77F20B
 gpg: Good signature from "Adam Gibson (CODE SIGNING KEY) <ekaggata@gmail.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -65,13 +65,11 @@ Primary key fingerprint: 2B6F C204 D9BF 332D 062B  461A 1410 01A1 AF77 F20B
 
 * Install JoinMarket
 ```
-$ tar xvzf joinmarket-clientserver-0.9.0.tar.gz -C /home/bitcoin
-$ rm joinmarket-clientserver-0.9.0.tar.gz*
+$ tar xvzf joinmarket-clientserver-0.9.1.tar.gz -C /home/bitcoin
+$ rm joinmarket-clientserver-0.9.1.tar.gz*
 $ cd /home/bitcoin
-$ ln -s joinmarket-clientserver-0.9.0 joinmarket
+$ ln -s joinmarket-clientserver-0.9.1 joinmarket
 $ cd joinmarket
-$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/commit/f9ea973be90d5ecd488bb89ddb60ec01ebf31cf2.patch
-$ patch -p1 < f9ea973be90d5ecd488bb89ddb60ec01ebf31cf2.patch
 $ ./install.sh --without-qt --disable-secp-check
 ```
 

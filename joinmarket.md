@@ -23,7 +23,8 @@ If you get `E: Package 'python-virtualenv' has no installation candidate` error 
 * With user "admin", create data directory on external HDD (to save SD card from wear out)
 
 ```
-$ mkdir /mnt/ext/joinmarket
+$ sudo mkdir /mnt/ext/joinmarket
+$ sudo chown bitcoin:bitcoin /mnt/ext/joinmarket
 ```
 
 #### Tor (optional)

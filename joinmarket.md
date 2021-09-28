@@ -16,7 +16,7 @@
 $ sudo apt-get install python-virtualenv curl python3-dev python3-pip build-essential automake pkg-config libtool libgmp-dev libltdl-dev libssl-dev libatlas3-base libopenjp2-7
 ```
 
-If you get `E: Package 'python-virtualenv' has no installation candidate` when running command above, replace `python-virtualenv` with `python3-virtualenv`.
+If you get `E: Package 'python-virtualenv' has no installation candidate` error when running command above, replace `python-virtualenv` with `python3-virtualenv`.
 
 #### Create data directory
 

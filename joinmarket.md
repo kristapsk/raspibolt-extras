@@ -92,7 +92,7 @@ User data will be stored and accessed in this location: /home/bitcoin/.joinmarke
 Created a new `joinmarket.cfg`. Please review and adopt the settings and restart joinmarket.
 ```
 
-* Edit configuration file (`nano -w /home/bitcoin/.joinmarket/joinmarket.cfg`) and specify your bitcoind RPC settings. Optionally, if you have Tor enabled, comment out clearnet host entires and `socks5 = false` under `[MESSAGING:server1]` and `[MESSAGING:server2]` and uncomment the ones with `.onion` addresses and `socks5 = true` (example below is for Tor enabled configuration).
+* Edit configuration file (`nano -w /home/bitcoin/.joinmarket/joinmarket.cfg`) and specify your bitcoind RPC settings. Optionally, if you have Tor enabled, comment out clearnet host entires and `socks5 = false` under `[MESSAGING:server1]`, `[MESSAGING:server2]` and `[MESSAGING:server3]` and uncomment the ones with `.onion` addresses and `socks5 = true` (example below is for Tor enabled configuration).
 ```
 [BLOCKCHAIN]
 #options: bitcoin-rpc, regtest, bitcoin-rpc-no-history
@@ -129,6 +129,21 @@ socks5_port = 9050
 
 #for tor
 host = ncwkrwxpq2ikcngxq3dy2xctuheniggtqeibvgofixpzvrwpa77tozqd.onion
+port = 6667
+usessl = false
+socks5 = true
+
+[MESSAGING:server3]
+#host = agora.anarplex.net
+channel = joinmarket-pit
+#port = 14716
+#usessl = true
+#socks5 = false
+socks5_host = localhost
+socks5_port = 9050
+
+#for tor
+host = vxecvd6lc4giwtasjhgbrr3eop6pzq6i5rveracktioneunalgqlwfad.onion
 port = 6667
 usessl = false
 socks5 = true

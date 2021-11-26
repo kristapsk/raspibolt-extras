@@ -77,5 +77,4 @@ $ ssh admin@raspibolt
 
 ### Connecting to your RaspiBolt via Tor from Windows
 
-TODO
-
+Configure PuTTY as described in the [Torifying PuTTY guide](https://gitlab.torproject.org/legacy/trac/-/wikis/doc/TorifyHOWTO/Putty) by the Tor Project.

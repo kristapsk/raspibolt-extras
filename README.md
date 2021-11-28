@@ -4,6 +4,8 @@
 
 Additional tutorials for [RaspiBolt](https://stadicus.github.io/RaspiBolt/).
 
+NOTE: These were written for RaspiBolt v1/v2, some stuff might not work with just released RaspiBolt v3 for now with default settings (for example, JoinMarket, see https://github.com/raspibolt/raspibolt/issues/801) or some might not be needed (ssh over Tor is now in default guide).
+
 * [JoinMarket on the RaspiBolt](joinmarket.md)
 * [SSHD as a Hidden Service with Tor on a RaspiBolt](sshd-as-a-hidden-service-with-tor.md)
 

@@ -43,8 +43,8 @@ It isn't strict requirement, but for the privacy it's recommended to use JoinMar
 # download software
 $ mkdir -p /home/bitcoin/download
 $ cd /home/bitcoin/download
-$ wget -O joinmarket-clientserver-0.9.3.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.9.3.tar.gz
-$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.9.3/joinmarket-clientserver-0.9.3.tar.gz.asc
+$ wget -O joinmarket-clientserver-0.9.5.tar.gz https://github.com/JoinMarket-Org/joinmarket-clientserver/archive/v0.9.5.tar.gz
+$ wget https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.9.5/joinmarket-clientserver-0.9.5.tar.gz.asc
 # verify that the release is signed by Adam Gibson (check the fingerprint)
 # fingerprint should match https://github.com/JoinMarket-Org/joinmarket-clientserver/releases
 $ wget https://raw.githubusercontent.com/JoinMarket-Org/joinmarket-clientserver/master/pubkeys/AdamGibson.asc
@@ -56,9 +56,9 @@ gpg: key 141001A1AF77F20B: public key "Adam Gibson (CODE SIGNING KEY) <ekaggata@
 gpg: Total number processed: 1
 gpg:               imported: 1
 gpg: no ultimately trusted keys found
-$ gpg --verify joinmarket-clientserver-0.9.3.tar.gz.asc
-gpg: assuming signed data in 'joinmarket-clientserver-0.9.3.tar.gz'
-gpg: Signature made Wed Oct 20 18:05:39 2021 EEST
+$ gpg --verify joinmarket-clientserver-0.9.5.tar.gz.asc
+gpg: assuming signed data in 'joinmarket-clientserver-0.9.5.tar.gz'
+gpg: Signature made Fri 18 Feb 2022 15:37:12 GMT
 gpg:                using RSA key 2B6FC204D9BF332D062B461A141001A1AF77F20B
 gpg: Good signature from "Adam Gibson (CODE SIGNING KEY) <ekaggata@gmail.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -68,10 +68,10 @@ Primary key fingerprint: 2B6F C204 D9BF 332D 062B  461A 1410 01A1 AF77 F20B
 
 * Install JoinMarket
 ```
-$ tar xvzf joinmarket-clientserver-0.9.3.tar.gz -C /home/bitcoin
-$ rm joinmarket-clientserver-0.9.3.tar.gz*
+$ tar xvzf joinmarket-clientserver-0.9.5.tar.gz -C /home/bitcoin
+$ rm joinmarket-clientserver-0.9.5.tar.gz*
 $ cd /home/bitcoin
-$ ln -s joinmarket-clientserver-0.9.3 joinmarket
+$ ln -s joinmarket-clientserver-0.9.5 joinmarket
 $ cd joinmarket
 $ ./install.sh --without-qt --disable-secp-check --disable-os-deps-check
 ```
@@ -105,48 +105,73 @@ rpc_user = rcpuser
 rpc_password = rpcpassword
 rpc_wallet_file =
 
+# SERVER 1/4) Darkscience IRC (Tor, IP)
+################################################################################
 [MESSAGING:server1]
-#host = irc.darkscience.net
 channel = joinmarket-pit
 port = 6697
 usessl = true
+
+# For traditional IP (default):
+#host = irc.darkscience.net
 #socks5 = false
+
+# For Tor (recommended as clearnet alternative):
+host = darkirc6tqgpnwd3blln3yfv5ckl47eg7llfxkmtovrv7c7iwohhb6ad.onion
+socks5 = true
 socks5_host = localhost
 socks5_port = 9050
 
-#for tor
-host = darkirc6tqgpnwd3blln3yfv5ckl47eg7llfxkmtovrv7c7iwohhb6ad.onion
-socks5 = true
-
+## SERVER 2/4) hackint IRC (Tor, IP)
+################################################################################
 [MESSAGING:server2]
-#host = irc.hackint.org
 channel = joinmarket-pit
+
+# For traditional IP (default):
+#host = irc.hackint.org
 #port = 6697
 #usessl = true
 #socks5 = false
-socks5_host = localhost
-socks5_port = 9050
 
-#for tor
+# For Tor (recommended as clearnet alternative):
 host = ncwkrwxpq2ikcngxq3dy2xctuheniggtqeibvgofixpzvrwpa77tozqd.onion
 port = 6667
 usessl = false
 socks5 = true
-
-[MESSAGING:server3]
-#host = agora.anarplex.net
-channel = joinmarket-pit
-#port = 14716
-#usessl = true
-#socks5 = false
 socks5_host = localhost
 socks5_port = 9050
 
-#for tor
+## SERVER 3/4) Anarplex IRC (Tor, IP)
+################################################################################
+[MESSAGING:server3]
+channel = joinmarket-pit
+
+# For traditional IP (default):
+#host = agora.anarplex.net
+#port = 14716
+#usessl = true
+#socks5 = false
+
+# For Tor (recommended as clearnet alternative):
 host = vxecvd6lc4giwtasjhgbrr3eop6pzq6i5rveracktioneunalgqlwfad.onion
 port = 6667
 usessl = false
 socks5 = true
+socks5_host = localhost
+socks5_port = 9050
+
+## SERVER 4/4) ILITA IRC (Tor -�| disabled by default)
+################################################################################
+#[MESSAGING:server4]
+#channel = joinmarket-pit
+#port = 6667
+#usessl = false
+#socks5 = true
+#socks5_host = localhost
+
+# For Tor (recommended):
+#host = ilitafrzzgxymv6umx2ux7kbz3imyeko6cnqkvy4nisjjj4qpqkrptid.onion
+#socks5_port = 9050
 ```
 ### Generate JoinMarket wallet
 ```

@@ -173,6 +173,51 @@ socks5_port = 9050
 #host = ilitafrzzgxymv6umx2ux7kbz3imyeko6cnqkvy4nisjjj4qpqkrptid.onion
 #socks5_port = 9050
 ```
+
+### Setting a Core wallet (required for Bitcoin Core v0.21 and newer)
+
+_NOTE: Although this step is not strictly required for Bitcoin Core versions before 0.21, it is still recommended._
+
+This point often confuses people. Joinmarket has its own wallet, with encryption and storage of keys, separate to Bitcoin Core,
+but it *stores addresses as watch-only in the Bitcoin Core wallet*, and the relevant rpc calls to Bitcon Core always specify the
+wallet they're talking to. As a result it's strongly recommended to use this feature, as it isolates those watch-only addresses
+being stored in Bitcoin Core, from any other usage you might have for that Core instance.
+
+If you don't do this, and there is one, Joinmarket will use the default Core wallet `wallet.dat` to store these watch-only addresses in.
+If there isn't one, start will fail with a JsonRpcError `Wallet file verification failed. Failed to load database path '…'. Path does not exist.`.
+Make sure to follow the following step.
+
+With `bitcoind` running, do:
+
+```
+bitcoin-cli -named createwallet wallet_name=jm_wallet descriptors=false
+```
+
+If this command fails with error `Unknown named parameter descriptors`, it means you run Bitcoin Core version older than v0.21. In that case do the following instead (but it's recommended to upgrade Bitcoin Core to more recent version):
+```
+bitcoin-cli createwallet "jm_wallet"
+```
+
+The "jm_wallet" name is just an example. You can set any name. Alternative to this `bitcoin-cli` command: you can set a line with `wallet=..` in your
+`bitcoin.conf` before starting Core (see the Bitcoin Core documentation for details). At the moment, only legacy wallets (`descriptors=false`)
+work with Joinmarket. This means that Bitcoin Core needs to have been built with legacy wallet (Berkeley DB) support.
+
+After you create the wallet in the Bitcoin Core, you should set it in the `joinmarket.cfg`:
+
+```
+[BLOCKCHAIN]
+...
+...
+rpc_wallet_file= jm_wallet
+```
+
+Then retry the `generate` command we mentioned above; it should now not error (see [below](#generate)).
+
+If you still get rpc connection errors, make sure you can connect to your Core node using the command line first.
+
+<a name="wallet-tool" />
+
+
 ### Generate JoinMarket wallet
 ```
 (jvmenv) $ python wallet-tool.py generate
